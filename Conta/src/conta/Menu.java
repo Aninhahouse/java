@@ -15,7 +15,7 @@ public class Menu {
 
 		while (true) {
 
-			System.out.println(cores.TEXT_CYAN  + cores.ANSI_BLACK_BACKGROUND + "*****************************************************");
+			System.out.println(cores.TEXT_CYAN_BOLD_BRIGHT  + cores.ANSI_BLACK_BACKGROUND + "*****************************************************");
 			System.out.println("                                                     ");
 			System.out.println("                BANCO DO BRAZIL COM Z                ");
 			System.out.println("                                                     ");
@@ -181,7 +181,7 @@ public class Menu {
 
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
-		System.out.println("Ana CArolina - Carolvieira.duarte6@gmail.com");
+		System.out.println("Ana Carolina - Carolvieira.duarte6@gmail.com");
 		System.out.println("github.com/Aninhahouse");
 		System.out.println("*********************************************************");
 	}
