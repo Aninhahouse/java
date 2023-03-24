@@ -17,7 +17,7 @@ public class Menu {
 		Conta c1 = new Conta(1 ,123, 1, "Ana Vieira", 100000.00f);
 		c1.visualizar();
            System.out.println("Saldo da conta: "+ c1.getSaldo());
-           
+             
            c1.setTitular("Ana Vieira Duarte");
            c1.visualizar();
            c1.sacar(1000.0f);
