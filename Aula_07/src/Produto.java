@@ -3,17 +3,20 @@ public class Produto {
 	
 	    private int game;
 	    private String nome;
-	    private String descricao;
-	    private double preco;
+	    protected String descricao;
+	    protected double preco;
 	    private int estoque;
-
+	    
 	    public Produto(int game, String nome, String descricao, double preco, int estoque) {
 	        this.game = game;
 	        this.nome = nome;
 	        this.descricao = descricao;
 	        this.preco = preco;
 	        this.estoque = estoque;
+	 
 	    }
+	    
+	   
 
 	    public int getGame() {
 	        return game;
