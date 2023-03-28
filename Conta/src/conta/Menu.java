@@ -15,19 +15,15 @@ public class Menu {
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
 		float saldo, limite, valor;
-		
-		Conta c1 = new Conta(1 ,123, 1, "Ana Vieira", 100000.00f);
-		c1.visualizar();
-           System.out.println("Saldo da conta: "+ c1.getSaldo());
              
-        ContaCorrente cc1 = new ContaCorrente (2 ,123, 1, "Ana Duarte", 100000.00f, 100.00f);
-   	    cc1.sacar(12000.0f);
-    	cc1.depositar(5000.0f);
+        ContaCorrente cc1 = new ContaCorrente (1 ,123, 1, "Ana Duarte", 100000.00f, 100.00f);
+   	    //cc1.sacar(12000.0f);
+    	//cc1.depositar(5000.0f);
     	cc1.visualizar();
    	    
-   	 ContaPoupanca cp1 = new ContaPoupanca (3 ,123, 1, "Carol Vieira", 100000.0f, 15);
-   	    cp1.sacar(1000.0f);
-    	cp1.depositar(5000.0f);
+   	 ContaPoupanca cp1 = new ContaPoupanca (2 ,123, 2, "Carol Vieira", 100000.0f, 15);
+   	    //cp1.sacar(1000.0f);
+    	//cp1.depositar(5000.0f);
     	cp1.visualizar();
        
         
