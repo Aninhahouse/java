@@ -1,10 +1,12 @@
 package conta;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import conta.model.ContaPoupanca;
 
-import conta.model.Conta;
+import conta.controller.ContaController;
 import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.cores;
 
 public class Menu {
@@ -15,23 +17,13 @@ public class Menu {
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
 		float saldo, limite, valor;
-             
-        ContaCorrente cc1 = new ContaCorrente (1 ,123, 1, "Ana Duarte", 100000.00f, 100.00f);
-   	    //cc1.sacar(12000.0f);
-    	//cc1.depositar(5000.0f);
-    	cc1.visualizar();
-   	    
-   	 ContaPoupanca cp1 = new ContaPoupanca (2 ,123, 2, "Carol Vieira", 100000.0f, 15);
-   	    //cp1.sacar(1000.0f);
-    	//cp1.depositar(5000.0f);
-    	cp1.visualizar();
-       
-        
-        
-		
+
+		ContaController contas = new ContaController();
+
 		while (true) {
 
-			System.out.println(cores.TEXT_CYAN_BOLD_BRIGHT  + cores.ANSI_BLACK_BACKGROUND + "*****************************************************");
+			System.out.println(cores.TEXT_CYAN_BOLD_BRIGHT + cores.ANSI_BLACK_BACKGROUND
+					+ "*****************************************************");
 			System.out.println("                                                     ");
 			System.out.println("                BANCO DO BRAZIL COM Z                ");
 			System.out.println("                                                     ");
@@ -51,10 +43,16 @@ public class Menu {
 			System.out.println("Entre com a opcao desejada:                          ");
 			System.out.println("                                                     " + cores.TEXT_RESET);
 
-			opcao = leia.nextInt();
+			try {
+				opcao = leia.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite valores inteiros!");
+				leia.nextLine();
+				opcao = 0;
+			}
 
 			if (opcao == 9) {
-				System.out.println(cores.TEXT_CYAN_BOLD + "Banco do Brazil com Z - O seu Futuro comeÃ§a aqui!");
+				System.out.println(cores.TEXT_CYAN_BOLD + "Banco do Brazil com Z - O seu Futuro começa aqui!");
 				sobre();
 				leia.close();
 				System.exit(0);
@@ -82,28 +80,37 @@ public class Menu {
 				case 1: {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = leia.nextFloat();
-                     break;
-					// criar o objeto conta corrente
+
+					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
+					keyPress();
+					break;
+				
 				}
 				case 2: {
 					System.out.println("Digite o dia do Aniversario da Conta: ");
 					aniversario = leia.nextInt();
-                   break;
-					// criar o objeto conta poupanca
-				}
+
+					contas.cadastrar(
+							new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
+					keyPress();
+					break;
+			
+			    	}
 				}
 
 				break;
 			case 2:
 				System.out.println("Listar todas as Contas\n\n");
-
+				contas.listarTodas();
+				keyPress();
 				break;
 			case 3:
 				System.out.println("Consultar dados da Conta - por número\n\n");
 
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-
+				contas.procurarPorNumero(numero);
+				keyPress();
 				break;
 			case 4:
 				System.out.println("Atualizar dados da Conta\n\n");
@@ -129,19 +136,22 @@ public class Menu {
 				case 1: {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = leia.nextFloat();
-                  break;
+					keyPress();
+					break;
 					// criar o objeto conta corrente
 				}
 				case 2: {
 					System.out.println("Digite o dia do Aniversario da Conta: ");
 					aniversario = leia.nextInt();
-				  break;
+					keyPress();
+					break;
 					// criar o objeto conta poupanca
 
 				}
-				default:{
+				default: {
 					System.out.println("Tipo de conta inválido!");
-				  break;
+					keyPress();
+					break;
 				}
 				}
 
@@ -153,6 +163,7 @@ public class Menu {
 
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
+				keyPress();
 
 				break;
 			case 6:
@@ -160,9 +171,10 @@ public class Menu {
 
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-				
+
 				System.out.println("Digite o valor do Saque: ");
 				valor = leia.nextFloat();
+				keyPress();
 
 				break;
 			case 7:
@@ -170,9 +182,10 @@ public class Menu {
 
 				System.out.println("Digite o número da conta: ");
 				numero = leia.nextInt();
-				
+
 				System.out.println("Digite o valor do Depósito: ");
 				valor = leia.nextFloat();
+				keyPress();
 
 				break;
 			case 8:
@@ -187,20 +200,31 @@ public class Menu {
 					System.out.println("Digite o Valor da Transferência (R$): ");
 					valor = leia.nextFloat();
 				} while (valor <= 0);
+				keyPress();
 
 				break;
 			default:
 				System.out.println("\nOpção Inválida!\n");
+				keyPress();
 				break;
 			}
 		}
 	}
-
 
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
 		System.out.println("Ana Carolina - Carolvieira.duarte6@gmail.com");
 		System.out.println("github.com/Aninhahouse");
 		System.out.println("*********************************************************");
+	}
+
+	public static void keyPress() {
+		try {
+			System.out.println(cores.TEXT_RESET +  "Pressione a tecla enter para continuar... ");
+			System.in.read();
+
+		} catch (IOException e) {
+			System.out.println("Erro de digitação!");
+		}
 	}
 }
